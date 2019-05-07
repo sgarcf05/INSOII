@@ -1,0 +1,116 @@
+[
+    {
+      "name": "Aquaman",
+      "biography": "El poder más reconocido de Aquaman es la capacidad telepática para comunicarse con la vida marina, la cual puede convocar a grandes distancias.",
+      "avatar": "aquaman.png",
+      "birth": "1941-11-01",
+      "creator": "DC"
+    },
+    {
+      "name": "Batman",
+      "biography": "Los rasgos principales de Batman se resumen en «destreza física, habilidades deductivas y obsesión». La mayor parte de las características básicas de los cómics han variado por las diferentes interpretaciones que le han dado al personaje.",
+      "avatar": "batman.png",
+      "birth": "1939-05-01",
+      "creator": "DC"
+    },
+    {
+      "name": "Captain America",
+      "biography": "Origen de un experimento que potencia las capacidades fisicas del ser humano, de ahi su ilimitada resistencia y fuerza.Su simbolo es su escudo fabricado por el material mas resistente del planeta(Vibranium).",
+      "avatar": "captainAmerica.png",
+      "birth": "1941-03-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Captain Marvel",
+      "biography": "Piloto de las Fuerzas Aereas de Estados Unidos de America que debido a un accidente en periodo de pruebas obtuvo un gran poder basado en el estado binary(puede volar a lo largo del universo a la velcoidad de la luz y tiene super fuerza al mismo tiempo que lanzar energia solar) .",
+      "avatar": "captainMarvel.png",
+      "birth": "1977-01-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Daredevil",
+      "biography": "Al haber perdido la vista, los cuatro sentidos restantes de Daredevil fueron aumentados por la radiación a niveles superhumanos, en el accidente que tuvo cuando era niño. A pesar de su ceguera, puede \"ver\" a través de un \"sexto sentido\" que le sirve como un radar similar al de los murciélagos.",
+      "avatar": "daredevil.png",
+      "birth": "1964-01-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Dr Strange",
+      "biography": "Maestro de las artes misticas, su poder principal es su gran sabiduria que proviene de la busqueda de conocimientos en su viaje a Kamar'taj para lograr revivir a su hermano. Posee la capa de levitacion, un objeto unico y de gran poder.",
+      "avatar": "drStrange.png",
+      "birth": "1963-07-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Hawkeye",
+      "biography": "Su principal poder es su precision con su arma principal, el arco del que ademas dispone de difentes tipos de flechas(explosivas,conmocionadoras y de punta afilada).Además dispone de una espada que utiliza para el combate cuerpo a cuerpo junto a su extrema agilidad.",
+      "avatar": "hawkeye.png",
+      "birth": "1964-09-01",
+      "creator": "Marvel"
+
+    },
+    {
+      "name": "Hulk",
+      "biography": "Su principal poder es su capacidad de aumentar su fuerza hasta niveles prácticamente ilimitados a la vez que aumenta su furia. Dependiendo de qué personalidad de Hulk esté al mando en ese momento (el Hulk Banner es el más débil, pero lo compensa con su inteligencia).",
+      "avatar": "hulk.png",
+      "birth": "1962-05-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Joker",
+      "biography": "Es un psicopata asesino alimentado de los recuerdos de su infancia y la falta del amor demostrado por sus parientes. Tiene la habilidad de calcular todas las posibilidades en un asesinato y poder tender trampas en el.",
+      "avatar": "joker.png",
+      "birth": "1940-10-01",
+      "creator": "DC"
+    },
+    {
+      "name": "Linterna Verde",
+      "biography": "Poseedor del anillo de poder que posee la capacidad de crear manifestaciones de luz sólida mediante la utilización del pensamiento. Es alimentado por la Llama Verde (revisada por escritores posteriores como un poder místico llamado Starheart), una llama mágica contenida en dentro de un orbe (el orbe era en realidad un meteorito verde de metal que cayó a la Tierra, el cual encontró un fabricante de lámparas llamado Chang)",
+      "avatar": "linterna-verde.png",
+      "birth": "1940-06-01",
+      "creator": "DC"
+   },
+   {
+    "name": "Loki",
+    "biography": "Es el dios del Engaño, hijo adoptivo de Odin el Dios de Asgard.Mediante el poder del engaño puede crear señuelos de si mismo y al mismo tiempo convertirse en otras personas.",
+    "avatar": "Loki.png",
+    "birth": "1962-10-01",
+    "creator": "Marvel"
+  },
+    {
+      "name": "Spider-Man",
+      "biography": "Tras ser mordido por una araña radiactiva, obtuvo los siguientes poderes sobrehumanos, una gran fuerza, agilidad, poder trepar por paredes. La fuerza de Spider-Man le permite levantar 10 toneladas o más. Gracias a esta gran fuerza Spider-Man puede realizar saltos íncreibles. Un \"sentido arácnido\", que le permite saber si un peligro se cierne sobre él, antes de que suceda. En ocasiones este puede llevar a Spider-Man al origen del peligro.",
+      "avatar": "spiderman.png",
+      "birth": "1962-08-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Star-Lord",
+      "biography": "Hijo de un celestial enamorado de un ser humano que murio en su nacimiento, este amor es el que le infunde de valor junto con su equipamiento tecnologico alienigena y su ilimitada fuente de humor.",
+      "avatar": "starLord.png",
+      "birth": "1976-01-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Thanos",
+      "biography": "De raza eterno(raza muy antigua y poderosa del universo), es un Titan propio de Titan , el mismo es su fuente de poder ya que tiene capacidades fisicas extremas y como deseo y objetivo tiene terminar con la mitad de la poblacion de todos los planetas que conforman el Universo.",
+      "avatar": "thanos.png",
+      "birth": "1973-02-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Venom",
+      "biography": "Es un simbionte(raza alienigena) que realizo una fusion con anfitrion que tenia un ser humano, al haberse fusionado en primera instancia con Spider-Man dispone de sus poderes   .",
+      "avatar": "venom.png",
+      "birth": "1984-05-01",
+      "creator": "Marvel"
+    },
+    {
+      "name": "Wolverine",
+      "biography": "En el universo ficticio de Marvel, Wolverine posee poderes regenerativos que pueden curar cualquier herida, por mortal que ésta sea, además ese mismo poder hace que sea inmune a cualquier enfermedad existente en la Tierra y algunas extraterrestres . Posee también una fuerza sobrehumana, que si bien no se compara con la de otros superhéroes como Hulk, sí sobrepasa la de cualquier humano.",
+      "avatar": "wolverine.png",
+      "birth": "1974-11-01",
+      "creator": "Marvel"
+    }
+  ]
+
