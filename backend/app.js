@@ -13,27 +13,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //app.use(express.static(__dirname, './public'))
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-//GET a http://localhost:3000/heroea -> Devuelve el listado de alumnos registrados
+//GET a http://localhost:3000/heroes -> Devuelve el listado de alumnos registrados
 app.get('/heroes', function(req, res) {
   console.log("Getting the list of heroes...\n");
   res.send(hService.heroes);
-});
-
-
-//POST a http://localhost:3000/alumnos -> Almacena los datos del alumno que se envíe en el body
-app.post('/alumnos', function(req, res) {
   
-  console.log("Posting alumns...\n")
-  try {
-    let newAlumn=req.body.nombre;
-    //let nameNewAlumn = newAlumn['nombre'];
-    fs.appendFileSync(pathOfTxt, "\n" + newAlumn);
-  
-    res.send("¡The alumn is saved in alumnos.txt!");
-  } catch (error) {
-    res.status(500).end("Internal Error");
-  }
 });
 
 
