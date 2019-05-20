@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-toolbar fixed app>
       <v-toolbar-title class="headline text-uppercase">
         <span>HEROES</span>
         <span class="font-weight-light">app</span>
@@ -17,43 +17,66 @@
         flat
         target="_blank"
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">Enseña JSON</span>
       </v-btn>
+      <v-toolbar-side-icon @click="drawerBoton = !drawerBoton"></v-toolbar-side-icon>
     </v-toolbar>
 
     <v-content>
-      <popout/>
+      <popout :sendDC = 'dc' :sendMarvel = 'marvel'/>
+      <navDrawer :drawer = 'drawerBoton'/>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import popout from './components/popout'
+import navDrawer from './components/navDrawer'
 import axios from 'axios'
+
 
 export default {
   name: 'App',
   components: {
-    popout
+    popout, 
+    navDrawer
   },
   data () {
     return {
-      info: null
+      info: null,
+      dc: null,
+      marvel: null,
+      drawerBoton: false
     }
-  }, 
+  },
+  
   mounted () {
     axios
         .get('http://localhost:3000/heroes')
-        .then(response => (this.info = JSON.stringify(response.data)))
+        .then(response => {
+          //this.info = JSON.stringify(response.data)
+          this.info = response.data;
+
+
+          this.dc = this.info.filter((hero) =>{
+            return hero.creator === 'DC';
+          });
+          this.marvel = this.info.filter((hero) =>{
+            return hero.creator === 'Marvel';
+          });
+
+
+          
+          })
         .catch(err => {
           this.info='no te cojo nada';
         // eslint-disable-next-line
           console.log(err)
         });
-    }, 
+    },
   methods: {
     imprimir: function(){
-      alert(this.info);
+      alert(JSON.stringify(this.marvel));
     }
   }
 
