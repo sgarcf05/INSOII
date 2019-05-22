@@ -23,6 +23,7 @@
     </v-toolbar>
 
     <v-content>
+      <login/>
       <popout :sendDC = 'dc' :sendMarvel = 'marvel'/>
       <navDrawer :drawer = 'drawerBoton'/>
     </v-content>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import login from './components/login'
 import popout from './components/popout'
 import navDrawer from './components/navDrawer'
 import axios from 'axios'
@@ -38,6 +40,7 @@ import axios from 'axios'
 export default {
   name: 'App',
   components: {
+    login,
     popout, 
     navDrawer
   },
