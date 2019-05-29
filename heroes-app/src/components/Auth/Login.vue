@@ -14,7 +14,7 @@
           <v-flex xs12 sm8 md4>
             <v-card>
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login Hero!</v-toolbar-title>
+                <v-toolbar-title>Login User!</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -23,10 +23,33 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <router-link to="/user" :sendID = 'id' :sendPass= 'pass'>
-                <v-btn @click="sendData" color="primary">Login</v-btn>
+                <router-link to="/register">
+                <v-btn @click="imprimir" color="primary">Register</v-btn>
                 </router-link>
+                <v-spacer></v-spacer>
+                <router-link to="/user">
+                <v-btn @click='logUser()' color="primary">Login</v-btn>
+                </router-link>
+                <v-dialog
+                  v-model="dialog"
+                  hide-overlay
+                  persistent
+                  width="300"
+                >
+                  <v-card
+                    color="indigo"
+                    dark
+                  >
+                  <v-card-text>
+                    Logging in
+                    <v-progress-linear
+                      indeterminate
+                      color="white"
+                      class="mb-0"
+                    ></v-progress-linear>
+                  </v-card-text>
+                  </v-card>
+                </v-dialog>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -37,25 +60,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+
   export default {
     data: () => ({
       id: null,
       pass: null,
+      dialog: false
     }),
-    props: {
-      source: String
-    }, 
-    created (){
-      //cuando se cree el componente hara lo que pongas dentro
-      
-    },
+
     methods: {
-      sendData: function(){
-        // const user = {
-        //   id:this.id,
-        //   password: this.pass
-        // };
-        alert(this.id);
+      logUser: function(){
+        //this.$emit("sendUSer", this.id);
+    
+        axios
+        .get('http://localhost:3000/user', this.user)
+        .catch(err => {
+          alert('Ha habido un error' +err)
+        });
+      },
+      imprimir: function(){
       }
     }
   }
@@ -104,3 +128,20 @@
     margin-bottom: 30px;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

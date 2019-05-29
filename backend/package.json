@@ -8,17 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sgarcf05/INSOII.git"
+    "url": "git+https://github.com/ULE-Informatica/09-appweb-g2-4.git"
   },
-  "author": "@kbayop00 @vpanic00 @sgarcf05",
+  "author": "@salong01 @kbayop00 @vpanic00 @sgarcf05",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sgarcf05/INSOII.git/issues"
+    "url": "https://github.com/ULE-Informatica/09-appweb-g2-4/issues"
   },
-  "homepage": "https://github.com/sgarcf05/INSOII.git#readme",
+  "homepage": "https://github.com/ULE-Informatica/09-appweb-g2-4#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "mysql2": "^1.6.5",
     "sequelize": "^5.2.12"
   },
   "devDependencies": {}

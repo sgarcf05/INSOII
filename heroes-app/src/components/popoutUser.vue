@@ -9,17 +9,19 @@
               label="Search a hero"
               outline
               prepend-icon="search"
-              name="hero"
+              name="searchHeroes"
               type="text"
               v-model= 'searchHero'
             >
           </v-text-field>
         </v-flex>
         <v-flex shrink pa-1>
-            <v-btn @click="searchHeroes()" color= '#EF5350'>Find</v-btn>
+            <v-btn @click="searchHeroes()" color= 'blue lighten-2'>Find</v-btn>
         </v-flex>
+        <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       </v-layout>
     </v-container>
+    
     <v-layout row wrap v-if="this.heroFind === null">
       <v-flex xs12 lg5 mb-3>
         <v-expansion-panel popout>
@@ -76,15 +78,19 @@
               <v-img :src="require('../../public/img/' + heroFind.avatar)"></v-img>
               <v-card-text>{{heroFind.biography}} </v-card-text>
               <v-card-text><div style="color: red" >Primera aparicion en los cómics:</div> {{heroFind.birth}} </v-card-text>
+
             </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
     </v-layout>
+    <navDrawer :drawerBoton = 'drawer'/>
   </v-container>
 </template>
 
 <script>
+
+import navDrawer from '@/components/navDrawer'
 
   export default {
     data () {
@@ -94,10 +100,18 @@
         descripcionHeroes: null,
         searchHero: null,
         heroFind: null,
-        drawer: null
+        drawer: false
       }
     },
-    props: ['sendDC','sendMarvel', 'sendHeroes'],
+    props: ['sendDC','sendMarvel','drawerBoton', 'sendHeroes'],
+    components:{
+      navDrawer
+    },
+
+    mounted:{
+
+    },
+      
     methods: {
       imprimir: function(){
         alert(this.searchHero);
@@ -111,6 +125,6 @@
             });        
         }
       }
-    } 
+    }
   }
 </script>

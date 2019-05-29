@@ -1,88 +1,62 @@
-<template>
-  <v-app>
-    <v-toolbar fixed app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>HEROES</span>
+<template >
+  <div id="app">
+    <div id="nav">
+      <v-toolbar fixed app>
+        <v-toolbar-title class="headline text-uppercase">
+        <router-link to="/">HEROES</router-link> -
         <span class="font-weight-light">app</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-img
-          :src="require('./assets/heroes.png')"
-          class="my-3"
-          contain
-          height="65"
-        ></v-img>
+      <router-link to="/heroes">HERO'S LIST</router-link>
       <v-spacer></v-spacer>
-      <v-btn v-on:click = 'imprimir'
-        flat
-        target="_blank"
-      >
-        <span class="mr-2">Enseña JSON</span>
-      </v-btn>
-      <v-toolbar-side-icon @click="drawerBoton = !drawerBoton"></v-toolbar-side-icon>
-    </v-toolbar>
+      <div v-if="id==null"> 
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link>
+      </div>
+      <router-link to="/user" v-else>Hi {{id}} </router-link>
 
-    <v-content>
-      <login/>
-      <popout :sendDC = 'dc' :sendMarvel = 'marvel'/>
-      <navDrawer :drawer = 'drawerBoton'/>
-    </v-content>
-  </v-app>
+      </v-toolbar>
+    </div> 
+    <router-view @sendUser= 'saveUser'/>
+  </div>
 </template>
 
 <script>
-import login from './components/login'
-import popout from './components/popout'
-import navDrawer from './components/navDrawer'
-import axios from 'axios'
-
-
 export default {
   name: 'App',
   components: {
-    login,
-    popout, 
-    navDrawer
   },
   data () {
     return {
-      info: null,
-      dc: null,
-      marvel: null,
-      drawerBoton: false
+      id:null
     }
-  },
-  
-  mounted () {
-    axios
-        .get('http://localhost:3000/heroes')
-        .then(response => {
-          //this.info = JSON.stringify(response.data)
-          this.info = response.data;
-
-
-          this.dc = this.info.filter((hero) =>{
-            return hero.creator === 'DC';
-          });
-          this.marvel = this.info.filter((hero) =>{
-            return hero.creator === 'Marvel';
-          });
-
-
-          
-          })
-        .catch(err => {
-          this.info='no te cojo nada';
-        // eslint-disable-next-line
-          console.log(err)
-        });
-    },
-  methods: {
-    imprimir: function(){
-      alert(JSON.stringify(this.marvel));
-    }
+  }, 
+  methods:{
+      saveUser: function(id){
+        this.id = id
+      }
   }
-
-
 }
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
