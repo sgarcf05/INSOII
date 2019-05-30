@@ -11,7 +11,7 @@ const Sequelize = require('sequelize');
 
 // Option 1: Passing parameters separately
 const sequelize = new Sequelize('heroesdatabasefinal', 'samuel', '1234', {
-  host: '192.168.43.228',
+  host: '192.168.1.137',
   dialect: 'mysql'
 });
 
@@ -94,7 +94,8 @@ sequelize
   });
 
   User.hasMany(HeroUser);
-  HeroUser.belongsTo(Hero);
+  Hero.hasMany(HeroUser);
+  //HeroUser.belongsTo(Hero);
 
   sequelize.sync({force: false});
 
@@ -165,7 +166,7 @@ app.delete('/heroe/:name',function (req, res){
 });
 
 //EDITAR EL HEROE
-app.update('/heroe/:name',function (req, res)  {
+app.put('/heroe/:name',function (req, res)  {
   var heroe= req.body;
   const name = req.params.name;
   HeroUser.update( { biography: req.body.biography, birth: req.body.birth}, 
@@ -193,16 +194,19 @@ app.get('/heroes', function(req, res){
 
 //GET a http://localhost:3000/heroesUser -> Devuelve el listado de Heroes registrados
 app.get('/heroesUser', function(req, res){
-  console.log("Let's see the hero's list...");
+  console.log("Let's see the User hero's list...");
   try{
-    HeroUser.findAll().then(heroesUser=>{
+    Hero.findAll(
+      {include: [
+      { model: HeroUser, where:{ userNameID: 'kevin'}}
+    ]}
+   ).then(heroesUser=>{
       res.status(200).send(heroesUser);
     })
   }catch(error){
       res.status(404).end(`Heroes not found`);
       console.log("there was an error searching the heros", error);
   }
-
 });
 
 //GET http://localhost:3000/heroe/:name -> busca el heroe pasado en la URL
@@ -256,19 +260,24 @@ app.post('/perfectHero', function(req, res) {
 app.get('/user', function(req,res){
   
   console.log("USER LOGIN \n");
-  console.log(req.body) 
-    User.findAll({
+
+  let errorLogin = 'error';
+
+  User.findAll({
       where: {
-        nameID: req.body.name
+        nameID: req.query.ID
       }
     }).then(data =>{
-      res.send(data);
-      console.log("--->",data);
-    }).catch(err => {
-      console.log("There was an error with the user logged in DB", err);
-      res.status(500).end();
+      if(isEmpty(data)==true || data === undefined){
+        console.log("There was an error with the user logged in DB");
+        res.send(errorLogin);
+        res.status(500).end();
+      }else{
+        res.send(data);
+        console.log("--->",data);
+      }
+     
     })
-  
 });
 
 
@@ -278,23 +287,49 @@ app.post('/register', function(req,res){
   console.log("REGISTER... \n")
   console.log(req.body)
 
-    User.create({
-        nameID : req.body.name,
-        pass: req.body.password
-    }).then(data => {
-      res.send(data)
-      console.log("Traza Register ->", data)
-    })
-    .catch(err => {
-      console.log("There was an error registering the user on DB", err);
+  let errorLogin = 'error';
+
+
+  User.findAll({
+    where: {
+      nameID: req.body.name
+    }
+  }).then(data =>{
+    if(isEmpty(data)==true || data === undefined){
+
+      User.create({
+          nameID : req.body.name,
+          pass: req.body.password
+      }).then(data => {
+        res.send(data)
+        console.log("Traza Register ->", data)
+      })
+      .catch(err => {
+        res.send()
+        console.log("There was an error registering the user on DB", err);
+        res.status(500).end();   
+       })  
+
+    }else{
+      res.send(errorLogin)
+      console.log("The user is already registered");
       res.status(500).end();   
-     })  
+    }
+   
+  })
+
  
 });
-
 
 app.listen(port, function () {
   console.log('Heroes app listening on port '+port+'!\n\n');
 });
 
 
+function isEmpty(obj) {
+  for(let key in obj) {
+      if(obj.hasOwnProperty(key))
+          return false;
+  }
+  return true;
+}
