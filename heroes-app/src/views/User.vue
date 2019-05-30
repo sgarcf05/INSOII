@@ -24,28 +24,30 @@ export default {
       marvel: null,
     }
   },
+
+  props: ['id'],
   
   mounted () {
-    axios
-        .get('http://localhost:3000/heroes')
-        .then(response => {
-          //this.heroes = JSON.stringify(response.data)
-          this.heroes = response.data;
+    // axios
+    //     .get('http://localhost:3000/heroes')
+    //     .then(response => {
+    //       //this.heroes = JSON.stringify(response.data)
+    //       this.heroes = response.data;
 
 
-          this.dc = this.heroes.filter((hero) =>{
-            return hero.creator === 'DC';
-          });
-          this.marvel = this.heroes.filter((hero) =>{
-            return hero.creator === 'Marvel';
-          });
-          })
-        .catch(err => {
-          this.heroes='no te cojo nada';
-          alert(err);
-        });
+    //       this.dc = this.heroes.filter((hero) =>{
+    //         return hero.creator === 'DC';
+    //       });
+    //       this.marvel = this.heroes.filter((hero) =>{
+    //         return hero.creator === 'Marvel';
+    //       });
+    //       })
+    //     .catch(err => {
+    //       this.heroes='no te cojo nada';
+    //       alert(err);
+    //     });
       axios
-        .get('http://localhost:3000/heroes')
+        .get('http://localhost:3000/heroesUser', this.id)
         .then(response => {
           //this.heroes = JSON.stringify(response.data)
           this.heroesUser = response.data;
