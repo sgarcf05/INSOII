@@ -107,34 +107,25 @@ import axios from 'axios'
             password : this.password
           };
 
-      axios
-      
+      axios     
       .post('http://localhost:3000/register', userRegister)
       .then(response =>{
-        alert(JSON.stringify(response))
-        alert((response.data))
+        if(response.data == 'error'){
+          alert('Usuario ya registrado, por favor inténtelo de nuevo');
+          this.$router.push('/login');
 
-      }) 
-      .catch(error=> {
-        alert(error);
-      });
-      
-      },
-      validateUser: function(){
-      axios
-      .get('http://localhost:3000/register')
-      .then(response =>{
-        if(response.name!='undefined'){
-          userRegister = true
-          alert('Usuario ya registrado, por favor inténtelo de nuevo')
         }else{
-          alert('Usuario registrado correctamente')
+          alert(this.id);
+          alert('Usuario registrado correctamente');
+          this.$emit("sendData", this.id)
+          this.$router.push('/user')
         }
 
       }) 
       .catch(error=> {
         alert(error);
       });
+      
       }
       
     }

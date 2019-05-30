@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Register msg="Register into the Hero App"/>
+    <Register @sendData='sendUser' msg="Register into the Hero App"/>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   name: 'home',
   components: {
     Register
+  },
+  methods: {
+    sendUser: function(id){
+      this.$emit('sendUser', id);
+    }  
   }
 }
 </script>
