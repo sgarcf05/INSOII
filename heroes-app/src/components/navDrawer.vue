@@ -24,7 +24,7 @@
 
                 <v-list-tile>
                     <v-list-tile-action>
-                        <button @click="imprimir">
+                        <button @click="deleteHero">
                             <v-icon>delete</v-icon>
                         </button>
                     </v-list-tile-action>
@@ -40,7 +40,7 @@
                 
                 <v-list-tile>
                     <v-list-tile-action>
-                        <button @click="editClicked=true">
+                        <button @click="searchHeroToUpdate">
                             <v-icon>edit</v-icon>
                         </button>
                     </v-list-tile-action>
@@ -71,7 +71,7 @@
             </v-list>
 
             <v-list>
-                <v-list-tile @click="imprimir">
+                <v-list-tile @click='logOut'>
                     <v-list-tile-action>
                         <v-icon>trending_flat</v-icon>
                     </v-list-tile-action>
@@ -130,26 +130,23 @@
             <v-dialog v-model="editClicked" persistent max-width="600px">
             <v-card>
                 <v-card-title>
-                <span class="headline">Edit Hero</span>
+                <span class="headline">Edit {{this.editHeroTF}}</span>
                 </v-card-title>
                 <v-card-text>
                 <v-container grid-list-md>
                     <v-layout wrap>
                     <v-flex xs12 sm6 md4>
-                        <v-text-field label="Date*" type='date' required></v-text-field>
-                    </v-flex>
-
-                    <v-flex xs12>
-                        <v-text-field label="Biography" tyoe ='text' required></v-text-field>
-                    </v-flex>                    
+                     <v-select
+                            prepend-icon="bookmarks" name="creator" label="Creator" type="text" v-model= 'comicfavorito'
+                            :items="itemsCreator"
+                        ></v-select>                    </v-flex>                    
                     </v-layout>
                 </v-container>
-                <small>*indicates required field</small>
-                </v-card-text>
+                <small>Change the creator of the hero: {{this.editHeroTF}}</small>                </v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="editClicked = false">Close</v-btn>
-                <v-btn color="blue darken-1" flat @click="editClicked = false">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="updateHero">Save</v-btn>
                 </v-card-actions>
             </v-card>
             </v-dialog>
@@ -172,32 +169,37 @@
                 deleteHeroTF: null,
                 editHeroTF: null,
                 editClicked: false,
-                helpData: false  
+                helpData: false,
+                loginOut: null,
+                comicfavorito: 'Change creator',
+                heroReceived: null,
+                itemsCreator: ['Marvel', 'DC']
             }
+            
         },
 
         props: ['drawerBoton'],
         
         methods: {
-            imprimir: function () {
-                alert(this.heroFound);
-            },
             addHero: function(){
                 
-
-                let url= 'http://localhost:3000/heroes/';
+                let url= 'http://localhost:3000/heroe/';
                 let heroToPass= this.addHeroTF;
                 let urlHero = url + heroToPass;
+
+                const id=this.getUrl();
+
                 axios
-                .get(urlHero , {
+                .post(urlHero , {
                     params:{
-                        ID: this.id,
+                        ID: id,
+                        hero: heroToPass
                     }
                 } 
                 )
                 .then(response => {
                     this.heroFound = response;
-                    alert(response)
+                    alert('Hero registered correctly! \n refresh the page please')
                 })
                 .catch(err => {
                     this.info='no te cojo nada';
@@ -208,20 +210,81 @@
 
             deleteHero: function(){
 
-                let url= 'http://localhost:3000/heroes/';
+                let url= 'http://localhost:3000/heroe/';
                 let heroToPass= this.deleteHeroTF;
                 let urlHero = url + heroToPass;
 
+                const id=this.getUrl();
+
                 axios
-                .delete(urlHero , {
+                .delete(urlHero, {
                     params:{
-                        ID: this.id,
+                        user: id,
                     }
-                } 
-                ).then(response=> {
-                    alert('Borrando el heroe' + name);
+                }).then (() =>{
+                    this.$router.push('/user/'+id)
+                }).catch(err => {
+                    alert('Ha habido un error' +err)
+                });
+            },
+
+            searchHeroToUpdate: function() {
+                this.editClicked = true;
+
+                let url= 'http://localhost:3000/heroe/' + this.editHeroTF;
+
+                axios
+                .get(url)
+                .then(res =>{
+                    this.heroReceived = res
+                }).catch(err =>{
+                    err = "The hero who search isn't in your DB"
+                    alert(err);
+
                 })
-            }
+
+                return this.heroReceived;
+            },
+
+            updateHero:function(){
+                
+                const id=this.getUrl();
+
+                let url= 'http://localhost:3000/heroe/' + this.searchHeroToUpdate().data.name;
+
+
+                axios
+                .put(url ,{
+                    params:{
+                        user: id,
+                        edit: this.comicfavorito,
+                        name: this.searchHeroToUpdate().data.name
+                    }
+                })
+                this.$router.push('/heroes');
+
+            },
+            logOut: function(){
+                alert('Cerrando sesión')
+                this.heroFound= null,
+                this.addHeroTF= null,
+                this.deleteHeroTF= null,
+                this.editClicked= false,
+                this.helpData= false,
+                this.heroName = null,
+                this.addedAt= null,
+                this.$emit('logOut', this.loginOut)
+                this.$router.push('/');
+            },
+            getUrl: function(){
+                //Se obtiene el valor de la URL desde el navegador
+                var actual = window.location+'';
+                //Se realiza la división de la URL
+                var split = actual.split("/");
+                //Se obtiene el ultimo valor de la URL
+                var id = split[split.length-1];
+                return id;
+             }
         }
     }
 </script>

@@ -21,7 +21,20 @@
         <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       </v-layout>
     </v-container>
-    
+
+    <div v-if="this.sendHeroes.length==0">
+      <v-layout align-center justify-center>
+          <div class="text-md-center">
+            <h1>WELCOME</h1>
+            <h2 class="my-3 headline">Start adding your heroes</h2>
+            <div>
+              <v-btn color="blue" @click="drawer = !drawer">Add first Hero</v-btn>
+              <v-btn color="blue" @click="goHome">Go Home</v-btn>
+            </div>  
+          </div>
+      </v-layout>
+    </div>
+    <div v-else>
     <v-layout row wrap v-if="this.heroFind === null">
       <v-flex xs12 lg5 mb-3>
         <v-expansion-panel popout>
@@ -84,7 +97,8 @@
         </v-expansion-panel>
       </v-flex>
     </v-layout>
-    <navDrawer :drawerBoton = 'drawer'/>
+    </div>
+    <navDrawer @logOut='logOut' :drawerBoton = 'drawer'/>
   </v-container>
 </template>
 
@@ -117,13 +131,23 @@ import navDrawer from '@/components/navDrawer'
         alert(this.searchHero);
       },
       searchHeroes: function(){
-        if(this.searchHero === '' || this.searchHero ===null){
+        if(this.searchHero == '' || this.searchHero ==null){
             this.heroFind = null
         }else{
-          this.heroFind=this.sendHeroes.find((hero)=>{
-            return hero.name === this.searchHero;
-            });        
+          try{
+            this.heroFind=this.sendHeroes.find((hero)=>{
+              return hero.name === this.searchHero;
+              }); 
+          }catch{
+            alert( 'El heroe buscado no esta en tu base de datos')
+          }
         }
+      },
+      goHome () {
+        this.$router.push({path: '/'})
+      },
+      logOut: function(login){
+          this.$emit('logOut',login)
       }
     }
   }

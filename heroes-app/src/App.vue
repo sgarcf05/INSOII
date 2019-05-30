@@ -10,14 +10,14 @@
       <router-link to="/heroes">HERO'S LIST</router-link>
       <v-spacer></v-spacer>
       <div v-if="id==null"> 
-      <router-link to="/login">Login</router-link> |
+      <router-link to="/login" :idPassed = 'id'>Login</router-link> |
       <router-link to="/register">Register</router-link>
       </div>
-      <router-link to="/user" v-else>Hi {{id}} </router-link>
+      <router-link :to="{name: 'user', params: {id:this.id}}" v-else>Hi {{id}} </router-link>
 
       </v-toolbar>
     </div> 
-    <router-view @sendUser= 'saveUser'/>
+    <router-view @logOut='userLogOut' @sendUser= 'saveUser'/>
   </div>
 </template>
 
@@ -34,6 +34,9 @@ export default {
   methods:{
       saveUser: function(id){
         this.id = id
+      },
+      userLogOut: function(logger){
+        this.id = logger
       }
   }
 }

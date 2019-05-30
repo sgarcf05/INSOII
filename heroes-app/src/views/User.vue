@@ -1,6 +1,6 @@
 <template>
     <v-content>
-        <popoutUser :sendDC = 'dc' :sendMarvel = 'marvel' :sendHeroes = 'heroes'/>
+        <popoutUser @logOut='logOut' :sendDC = 'dc' :sendMarvel = 'marvel' :sendHeroes = 'heroesUser'/>
     </v-content>
 </template>
 
@@ -25,30 +25,18 @@ export default {
     }
   },
 
-  props: ['id'],
   
   mounted () {
-    // axios
-    //     .get('http://localhost:3000/heroes')
-    //     .then(response => {
-    //       //this.heroes = JSON.stringify(response.data)
-    //       this.heroes = response.data;
 
-
-    //       this.dc = this.heroes.filter((hero) =>{
-    //         return hero.creator === 'DC';
-    //       });
-    //       this.marvel = this.heroes.filter((hero) =>{
-    //         return hero.creator === 'Marvel';
-    //       });
-    //       })
-    //     .catch(err => {
-    //       this.heroes='no te cojo nada';
-    //       alert(err);
-    //     });
+      let id= this.getUrl();
+      
       axios
-        .get('http://localhost:3000/heroesUser', this.id)
-        .then(response => {
+        .get('http://localhost:3000/heroesUser', {
+          params:{
+            user: id,
+           }
+          } 
+          ).then(response => {
           //this.heroes = JSON.stringify(response.data)
           this.heroesUser = response.data;
 
@@ -66,9 +54,22 @@ export default {
     },
   methods: {
     imprimir: function(){
-      alert(this.sendID);
+      alert(this.dc);
+    },
+    getUrl: function(){
+      //Se obtiene el valor de la URL desde el navegador
+      var actual = window.location+'';
+      //Se realiza la división de la URL
+      var split = actual.split("/");
+      //Se obtiene el ultimo valor de la URL
+      var id = split[split.length-1];
+      return id;
+    },
+    logOut: function(logger){
+      this.$emit('logOut', logger)
     }
   }
+  
 
 }
 </script>

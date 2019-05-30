@@ -32,20 +32,20 @@ export default new Router({
         component: Login
     },
     {
-      path: '/user',
+      path: '/user/:id',
       name: 'user',
       component: User
-  },
-  {
-    path: '/addHero',
-    name: 'addHero',
-    component: AddHero
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register
-  }
+    },
+    {
+      path: '/addHero',
+      name: 'addHero',
+      component: AddHero
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
+    }
 
   ]
 })

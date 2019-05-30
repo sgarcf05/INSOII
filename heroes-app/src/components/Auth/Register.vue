@@ -115,10 +115,10 @@ import axios from 'axios'
           this.$router.push('/login');
 
         }else{
-          alert(this.id);
           alert('Usuario registrado correctamente');
           this.$emit("sendData", this.id)
-          this.$router.push('/user')
+          let url = '/user/' + this.id;
+          this.$router.push(url)
         }
 
       }) 

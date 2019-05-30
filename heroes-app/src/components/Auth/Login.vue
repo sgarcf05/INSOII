@@ -81,8 +81,9 @@ import axios from 'axios'
               alert('El usuario introducido no esta registrado');
               this.$router.push('/register')
             }else{
+              let url = '/user/' + this.id;
               this.$emit("logUser", this.id)
-              this.$router.push('/user')
+              this.$router.push(url)
           }
         })
         .catch(err => {

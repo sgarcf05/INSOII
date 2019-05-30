@@ -18,7 +18,6 @@
                   <v-form>
                     <v-text-field  prepend-icon="person" name="name" label="Name" type="text" v-model= 'name'></v-text-field>
                     <v-text-field  prepend-icon="import_contacts" name="biography" label="Biography" type="text" v-model= 'biography'></v-text-field>
-                    <v-text-field  prepend-icon="portrait" name="avatar" label="Avatar" type="" v-model= 'avatar'></v-text-field>
                     <v-text-field  prepend-icon="calendar_today" name="birth" label="Birth" type="date" v-model= 'birth'></v-text-field>
                     <v-select
                       prepend-icon="thumbs_up_down" name="category" label="Hero or Villain" type="text" v-model= 'category'
@@ -83,7 +82,7 @@ import axios from 'axios'
         const hero = {
           name:this.name,
           biography: this.biography,
-          avatar : this.avatar,
+          avatar : 'aquaman.png',
           birth: this.birth,
           category : this.category,
           creator : this.creator
