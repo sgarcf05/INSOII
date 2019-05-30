@@ -189,7 +189,12 @@
                 let heroToPass= this.addHeroTF;
                 let urlHero = url + heroToPass;
                 axios
-                .get(urlHero)
+                .get(urlHero , {
+                    params:{
+                        ID: this.id,
+                    }
+                } 
+                )
                 .then(response => {
                     this.heroFound = response;
                     alert(response)
@@ -199,12 +204,22 @@
                     alert(err);
                 });          
             },
-            deleteHero: function(hero){
+
+
+            deleteHero: function(){
+
+                let url= 'http://localhost:3000/heroes/';
+                let heroToPass= this.deleteHeroTF;
+                let urlHero = url + heroToPass;
+
                 axios
-                .delete('http://localhost:3000/heroe/'+ hero)
-                .then(response=> {
+                .delete(urlHero , {
+                    params:{
+                        ID: this.id,
+                    }
+                } 
+                ).then(response=> {
                     alert('Borrando el heroe' + name);
-                    this.hero.splice(index, 1);
                 })
             }
         }
