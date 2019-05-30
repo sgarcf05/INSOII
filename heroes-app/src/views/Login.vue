@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Login @sendUser='sendUser'/>
+    <Login @logUser='sendUser'/>
   </div>
 </template>
 
@@ -15,7 +15,6 @@ export default {
   },
   methods: {
       sendUser: function(id){
-        console.log("EVENTO" + id);
         this.$emit('sendUser', id);
       }  
   }

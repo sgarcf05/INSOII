@@ -27,9 +27,7 @@
                 <v-btn @click="imprimir" color="primary">Register</v-btn>
                 </router-link>
                 <v-spacer></v-spacer>
-                <router-link to="/user">
                 <v-btn @click='logUser()' color="primary">Login</v-btn>
-                </router-link>
                 <v-dialog
                   v-model="dialog"
                   hide-overlay
@@ -70,11 +68,23 @@ import axios from 'axios'
     }),
 
     methods: {
-      logUser: function(){
-        //this.$emit("sendUSer", this.id);
-    
+      logUser: function()  {
+        
         axios
-        .get('http://localhost:3000/user', this.user)
+        .get('http://localhost:3000/user', {
+          params:{
+            ID: this.id,
+           }
+          } 
+        ).then (response =>{
+            if(response.data == 'error'){
+              alert('El usuario introducido no esta registrado');
+              this.$router.push('/register')
+            }else{
+              this.$emit("logUser", this.id)
+              this.$router.push('/user')
+          }
+        })
         .catch(err => {
           alert('Ha habido un error' +err)
         });
