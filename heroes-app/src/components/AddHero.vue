@@ -31,13 +31,11 @@
                     ></v-select>
                   </v-form>
 
-                <router-link to='/user'>
                   <v-btn 
                     dark
                     @click="sendData" 
                     color="blue">Create!
                   </v-btn>
-                </router-link>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -94,6 +92,9 @@ import axios from 'axios'
 
       axios
       .post('http://localhost:3000/perfectHero', hero)
+      .then(() => {
+        this.$router.push('/user')
+      })
       .catch(function (error) {
         alert(error);
       });
